@@ -1,0 +1,49 @@
+html,body{
+    margin: 0%;
+    padding: 0%;
+    height: 100%;
+    font-family: Arial, sans-serif;
+}
+
+.container{
+   display: inline-flex;
+   height: 100%;
+   
+  
+}
+.left{
+    width: 650px;
+   background: radial-gradient(50% 66% at 50% 50%, #FBBF24 70%, #F59E0B 100%); 
+   justify-content: center;
+}
+
+.right{
+    width: 650px;
+    background: radial-gradient(50% 50% at 50% 50%, #F8FAFC 0%, #F5F8FB 45.49%, #F1F5F9 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+   }
+.heading{
+    text-align: center;
+}
+.form{
+   text-align: center;
+
+} 
+input[type="email"],
+input[type="password"],
+button {
+    margin-bottom: 10px;
+    width: 70%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+form a{
+    padding-left: 120px;
+}
+button{
+    margin-top: 20px;
+    background-color: #FBBF24;
+}
