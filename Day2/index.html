@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gym Record</title>
+<style>
+    .bodyElements{
+        
+justify-content: center;
+    }
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th, td {
+        border: 1px solid #dddddd;
+        text-align: center;
+        padding: 8px;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    input[type="number"] {
+        width: 100px;
+    }
+
+    button {
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #45a049;
+    }
+</style>
+</head>
+<body>
+<center>
+<div class="bodyElements">
+    <h2>GYM MEMBERS</h2>
+<form id="inputForm">
+    
+    <label for="num1">Name:</label>
+    <input type="text" id="num1" name="num1" required><br><br>
+    
+    <label for="dropdown">Membership:</label>
+    <select id="dropdown">
+        <option value="Gold">Gold</option>
+        <option value="Silver">Silver</option>
+        <option value="Bronze">Bronze</option>
+    </select><br><br>
+    
+    <label for="num3">Phone num:</label>
+    <input type="number" id="num3" name="num3" required><br><br>
+    <button type="reset" >Reset</button>   
+    <button type="button" onclick="addToTable()">Add to Table</button>
+</center>
+</form>
+
+<br><br>
+
+<table id="dataTable">
+    <thead>
+        <tr class="members">
+            <th colspan="4">Member list</th>
+            </tr>
+    </thead>
+    <tbody>
+        <!-- Table content will be added dynamically using JavaScript -->
+    </tbody>
+</table>
+</div>
+
+<script>
+    function addToTable() {
+        var name = document.getElementById("num1").value;
+        var membershipType = document.getElementById("dropdown").value;
+        var phoneNumber = document.getElementById("num3").value;
+
+        // Check if the input values already exist in the table
+        var table = document.getElementById("dataTable");
+        var rows = table.getElementsByTagName("tr");
+        for (var i = 0; i < rows.length; i++) {
+            var cells = rows[i].getElementsByTagName("td");
+            if (cells.length > 0) {
+                var existingName = cells[0].innerText;
+                var existingMembershipType = cells[1].innerText;
+                var existingPhoneNumber = cells[2].innerText;
+                if (existingName === name && existingMembershipType === membershipType && existingPhoneNumber === phoneNumber) {
+                    alert("This member already exists in the table.");
+                    return; // Exit the function without adding a new row
+                }
+            }
+        }
+
+        // If the member is not already in the table, add a new row
+        var tableRef = document.getElementById("dataTable").getElementsByTagName('tbody')[0];
+        var newRow = tableRef.insertRow();
+
+        newRow.className = "members";
+
+        var cell1 = newRow.insertCell(0);
+        var cell2 = newRow.insertCell(1);
+        var cell3 = newRow.insertCell(2);
+        var cell4 = newRow.insertCell(3);
+
+        cell1.appendChild(document.createTextNode(name));
+        cell2.appendChild(document.createTextNode(membershipType));
+        cell3.appendChild(document.createTextNode(phoneNumber));
+
+        document.getElementById("num1").value = "";
+        document.getElementById("num3").value = "";
+        document.getElementById("dropdown").value = "Gold";
+
+
+        var deleteButton = document.createElement("button");
+        deleteButton.innerHTML = "Delete";
+        deleteButton.onclick = function() {
+            var row = this.parentNode.parentNode;
+            row.parentNode.removeChild(row);
+        };
+        cell4.appendChild(deleteButton);
+    }
+</script>
+</body>
+</html>
